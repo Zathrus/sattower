@@ -1,0 +1,16 @@
+---
+- name: install OpenShift pre-reqs
+  yum:
+    name:
+      - wget
+      - git
+      - net-tools
+      - bind-utils
+      - iptables-services
+      - bridge-utils
+      - bash-completion
+      - kexec-tools
+      - sos
+      - psacct
+      - docker
+    state: latest

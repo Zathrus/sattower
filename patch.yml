@@ -1,0 +1,8 @@
+---
+- name: Patch all systems
+  hosts: all
+  gather_facts: yes
+  roles:
+    - role: patch
+      when:
+        - ansible_os_family == 'RedHat'

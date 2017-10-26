@@ -1,0 +1,18 @@
+---
+- name: provision via satellite
+  hosts: sat.example.com
+  # remoteuser: root
+  gather_facts: no
+  vars:
+    hname: ballpeen3
+    organid: 1
+    locationid: 2
+    hgroup: rhel7
+    cresource: rhv
+    computeattributes: start=1
+  tasks:
+    - command: hammer host create --name {{ hname }} --organization-id {{ organid }} --location-id {{ locationid }} --hostgroup {{ hgroup }} --compute-resource {{ cresource }} --compute-attributes="{{ computeattributes }}" #"
+    # Pause for the host to actually exist
+    #- pause: seconds=30
+    - command: hammer host set-parameter --host {{ hname }} --name owner --value "{{ owner }}"
+    - command: hammer host set-parameter --host {{ hname }} --name host_type --value "{{ host_type }}"

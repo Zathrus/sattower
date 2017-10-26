@@ -1,0 +1,9 @@
+---
+# Note, this doesn't change the role -- it just makes sure the webserver is
+# there as if it was that role
+- name: add a webserver capability
+  vars:
+    destmachine: all:!sat.example.com
+  hosts: "{{ destmachine }}"
+  roles:
+    - role: webserver

@@ -1,0 +1,33 @@
+---
+- name: Install Apache Web Server
+  yum:
+    name: httpd
+    state: latest
+
+- name: Install the web page
+  template:
+    src: index.j2
+    dest: /var/www/html/index.html
+    owner: apache
+    group: apache
+    mode: 0644
+
+- name: Start Apache Web Service
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: Set firewall policy for the http
+  firewalld:
+    service: https
+    immediate: true
+    permanent: true
+    state: enabled
+
+- name: Set firewall policy for the https
+  firewalld:
+    service: http
+    immediate: true
+    permanent: true
+    state: enabled

@@ -1,0 +1,7 @@
+---
+# Perform configuration tasks
+- name: Modify kernel parameters.
+  include: wmem_max_modification.yml
+
+- name: Set MOTD
+  include: motd.yml

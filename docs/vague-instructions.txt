@@ -1,0 +1,40 @@
+These are deeply and utterly vague instructions for setting up the RHPDS
+environment to work for this Satellite / Tower demo. You're not supposed to
+understand them. But I do, and will work toward turning them into a real
+script / playbook.
+
+become root on ws, can ssh w/o pw
+disable dhcp on storage
+
+
+satellite-installer --scenario satellite --foreman-proxy-dhcp true --foreman-proxy-dhcp-interface eth0 --foreman-proxy-dhcp-range "192.168.1.3 192.168.1.254" --foreman-proxy-dhcp-gateway 192.168.0.2 --foreman-proxy-dhcp-nameservers 192.168.0.70 --foreman-proxy-tftp true --foreman-proxy-tftp-servername 192.168.0.70 --foreman-proxy-dhcp-managed true --enable-foreman-plugin-openscap --foreman-proxy-dns true --foreman-proxy-dns-forwarders "192.168.0.1" --foreman-proxy-dns-interface "eth0" --foreman-proxy-dns-reverse "1.168.192.in-addr.arpa" --foreman-proxy-dns-server "192.168.0.70" --foreman-proxy-dns-zone "example.com"
+
+mkdir /etc/puppet/environments/production/modules
+yum install -y puppet-foreman_scap_client
+foreman-rake foreman_openscap:bulk_upload:default
+
+sync 7Server and sat tools 6.2
+create RHV compute resource, set location
+https://rhvm-d7aa.rhpds.opentlc.com/ovirt-engine/api/v3
+
+configure small compute profile
+subnet add domain, set location
+
+change install media 7.3 location to default
+add kickstart
+operating system, select kickstart
+AK, change 6 server to no, 6.2 tools to yes
+puppet classes import
+create host group
+
+
+clone provisioning template, add snippet, mark OS, add location
+change OS defaults
+
+content view publish new view once sync complete
+
+operating system config, host group config, compute config
+
+
+ethernet nic name in two places,
+os media selection -> synced content, synced content -> RHEL7 Server KS 7.3

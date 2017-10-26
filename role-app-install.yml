@@ -1,0 +1,23 @@
+---
+- name: Put App Functionality on Systems
+  hosts: "{{ destmachine }}"
+  vars:
+    destmachine: all:!sat.example.com
+  gather_facts: yes
+  roles:
+    - role: patch
+      when: ansible_os_family == 'RedHat'
+
+    - role: config
+      when: ansible_os_family == 'RedHat'
+
+    - role: webserver
+      when: foreman_params.host_type == 'web'
+
+    - role: dbserver
+      vars_files:
+        - vars/main.yml
+      when: foreman_params.host_type == 'database'
+
+    - role: ocpserver
+      when: foreman_params.host_type == 'openshift'

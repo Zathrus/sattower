@@ -1,0 +1,14 @@
+---
+# Set wmem_max to a minimum required value -- don't change if higher!
+- name: Get current value for proc_wmem_max
+  shell: cat /proc/sys/net/core/wmem_max
+  register: cur_wmem_max
+
+- name: Set proc_wmem_max if needed
+  vars:
+    min_value: 8388608
+  sysctl:
+    name: net.core.wmem_max
+    value: "{{ min_value }}"
+    state: present
+  when: min_value > cur_wmem_max.stdout | int

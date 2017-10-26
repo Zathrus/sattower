@@ -1,0 +1,19 @@
+---
+- name: Reboot the server.
+  command: /sbin/shutdown -r +1
+  async: 0
+  poll: 0
+  ignore_errors: true
+
+- name: Pause for 30 seconds to account for some slower machines.
+  pause:
+    seconds: "{{ pause_seconds | default(90) }}"
+  delegate_to: localhost
+  when: do_pause | default('yes') | bool
+
+- name: Wait for the server to be listening for SSH
+  wait_for:
+    host: "{{ ansible_host | default(inventory_hostname) }}"
+    port: "{{ port | default(22) }}"
+    delay: 10
+  delegate_to: localhost
