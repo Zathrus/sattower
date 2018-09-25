@@ -1,0 +1,13 @@
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: Check for CVE patch
+    # Have to use command because yum module isn't up to doing this
+    command: /usr/bin/yum updateinfo list --cve "{{cve}}"
+    args:
+      warn: no
+    register: cveout
+
+  - debug:
+      msg: "{{ cveout.stdout | regex_findall('RHSA\\S+\\s+\\S+\\s+(\\S+)') }}"
+    when: "'RHSA' in cveout.stdout"
