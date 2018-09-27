@@ -1,4 +1,6 @@
-- hosts: all
+# Note that host should be restricted to something with upstream access, or
+# else you will get only info for available packages
+- hosts: sat.example.com
   remote_user: root
   tasks:
   - name: Check for CVE patch
@@ -8,6 +10,9 @@
       warn: no
     register: cveout
 
-  - debug:
-      msg: "{{ cveout.stdout | regex_findall('RHSA\\S+\\s+\\S+\\s+(\\S+)') }}"
-    when: "'RHSA' in cveout.stdout"
+  - set_fact: "pkglist={{ cveout.stdout | regex_findall('RHSA\\S+\\s+\\S+\\s+(\\S+)') }}"
+
+  - name: Determine success
+    fail:
+      msg: "No package available for CVE(s) {{cve}}"
+    when: "'RHSA' not in cveout.stdout
