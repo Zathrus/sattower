@@ -5,3 +5,6 @@
 
 - name: Set MOTD
   include: motd.yml
+
+- name: Set tower group
+  include: setgroup.yml
