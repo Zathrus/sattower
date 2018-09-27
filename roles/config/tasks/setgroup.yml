@@ -6,8 +6,8 @@
     method: POST
     body: " {\"id\": {{ ansible_facts.id }} }"
     force_basic_auth: yes
-    user: {{ tower_user }}
-    password: {{ tower_pass }}
+    user: "{{ tower_user }}"
+    password: "{{ tower_pass }}"
     validate_certs: no
     status_code: 204
     headers:
