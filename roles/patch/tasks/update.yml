@@ -1,5 +1,8 @@
 ---
-- name: "Update packages ({{ pkglist | default '*') }})"
+- name: "Update packages"
+  debug:
+    msg: "Updating {{ pkglist | default('*') }}"
+
   yum:
     name: "{{ pkglist | default('*') }}"
     state: latest
