@@ -5,7 +5,7 @@
   poll: 0
   ignore_errors: true
 
-- name: Pause for 30 seconds to account for some slower machines.
+- name: Pause for 90 seconds to account for some slower machines.
   pause:
     seconds: "{{ pause_seconds | default(90) }}"
   delegate_to: localhost
