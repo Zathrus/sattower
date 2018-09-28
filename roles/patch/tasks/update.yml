@@ -1,0 +1,6 @@
+---
+- name: Update all OS packages.
+  yum:
+    name: "{{ pkglist | default('*') }}"
+    state: latest
+  register: package_update

@@ -1,0 +1,18 @@
+---
+- name: Ensure yum-utils is available
+  yum:
+    update_cache: yes
+    name: yum-utils
+    state: present
+
+- name: Check if reboot is necessary.
+  command: needs-restarting -r
+  register: reboot_check
+  changed_when: false
+  failed_when: reboot_check.rc > 1
+
+- name: Reboot the machine if necessary.
+  include_role:
+    name: reboot
+  when:
+    - reboot_check.rc == 1

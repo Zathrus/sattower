@@ -1,26 +1,8 @@
 ---
 # This playbook is for patching / updating a system, rebooting if needed
 
-- name: Ensure packaging dependencies are installed.
-  yum:
-    update_cache: yes
-    name: yum-utils
-    state: latest
+- name: Process updates
+  include: update.yml
 
-- name: Update all OS packages.
-  yum:
-    name: "*"
-    state: latest
-  register: package_update
-
-- name: Check if reboot is necessary.
-  command: needs-restarting -r
-  register: reboot_check
-  changed_when: false
-  failed_when: reboot_check.rc > 1
-
-- name: Reboot the machine if necessary.
-  include_role:
-    name: reboot
-  when:
-    - reboot_check.rc == 1
+- name: Reboot if necessary
+  include: checkreboot.yml
