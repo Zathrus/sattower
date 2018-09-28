@@ -15,4 +15,4 @@
   - name: Determine success
     fail:
       msg: "No package available for CVE(s) {{cve}}"
-    when: "'RHSA' not in cveout.stdout
+    when: 'RHSA' not in cveout.stdout
