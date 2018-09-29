@@ -1,10 +1,10 @@
 ---
 - name: "Display packages to be updated"
   debug:
-    msg: "Updating {{ pkglist | default('*') }}"
+    msg: "Updating {{ pkglist | join(' ') }}"
 
 - name: "Update packages"
   yum:
-    name: "{{ pkglist | default('*') }}"
+    name: "{{ pkglist | join(' ') }}"
     state: latest
   register: package_update
