@@ -13,9 +13,10 @@
       msg: "No package available for CVE(s) {{ cve }}"
     when: "cveout.json.results[0].packages is not defined"
 
-  - set_fact:
-      pkglist: "{{ cveout.json.results[0].packages }}"
-      cacheable: true
+  - set_stats:
+      aggregate: no
+      data:
+        pkglist: "{{ cveout.json.results[0].packages }}"
 
   - debug:
       msg: "Packages: {{ pkglist }}"
