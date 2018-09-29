@@ -1,0 +1,19 @@
+- hosts: localhost
+  tasks:
+  - name: Call Satellite API for errata info
+    uri:
+      url: "https://sat.example.com/katello/api/errata?cve={{ cve }}"
+      validate_certs: no
+      force_basic_auth: yes
+      user: admin
+      password: "{{ ansible_password }}"
+    register: cveout
+
+  - fail:
+    msg: "No package available for CVE(s) {{ cve }}"
+    when: "cveout.json.results[0].packages is not defined"
+
+  - set_fact: "pkglist={{ cveout.json.results[0].packages }}"
+
+  - debug:
+    msg: "Packages: {{ pkglist }}"
