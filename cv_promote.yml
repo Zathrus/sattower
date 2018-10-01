@@ -16,7 +16,7 @@
       method: POST
       body:
         content_view_version_environments:
-          - "{{ ansible_facts.foreman.content_facet_attributes.lifecycle_environment_id }}"
+          - "{{ lc_id | unique }}"
         resolve_dependencies: 1
         add_content:
           - "{{ errata_id }}"

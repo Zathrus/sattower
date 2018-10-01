@@ -1,0 +1,8 @@
+---
+- hosts: {{ destmachine }}
+    gather_facts: no
+  tasks:
+    - name: Store the lifecycle environment id for later use
+      set_stats:
+        data:
+          lc_id: "[ {{ ansible_facts.foreman.content_facet_attributes.lifecycle_environment_id }} ]"
