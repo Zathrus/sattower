@@ -1,0 +1,24 @@
+---
+- hosts: sat.example.com
+  vars:
+    orgid: 1
+- name: Promote requested packages in content view
+  vars:
+    orgid: 1
+  tasks:
+  - name: Call Satellite API to promote content
+    uri:
+      url: https://sat.example.com/katello/api/content_view_versions/incremental_update/
+      validate_certs: no
+      force_basic_auth: yes
+      user: admin
+      password: "{{ ansible_password }}"
+      method: POST
+      body:
+        content_view_version_environments:
+          - "{{ ansible_facts.foreman.content_facet_attributes.lifecycle_environment_id }}"
+        resolve_dependencies: 1
+        add_content:
+          - "{{ errata_id }}"
+        updated_hosts[included]:
+          - nil

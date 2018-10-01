@@ -17,3 +17,4 @@
       aggregate: no
       data:
         pkglist: "{{ cveout.json.results[0].packages }}"
+        errata_id: "{{ cveout.json.results[0].errata_id }}"

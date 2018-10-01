@@ -1,11 +1,11 @@
 # General outline:
 # Try to update packages on host
-# - suceed -- done! yay. Happy path.
+# - succeed -- done! yay. Happy path.
 # - fail -- try to promote, publish new CV, re-run update
 
 - name: Run updates for package list
   hosts: "{{ destmachine }}"
   vars:
-    destmachine: all:!sat.example.com
+    destmachine: all:!sat.example.com,localhost
   roles:
     - role: patch
