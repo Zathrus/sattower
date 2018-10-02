@@ -1,5 +1,5 @@
 ---
-- hosts: sat.example.com
+- hosts: localhost
   vars:
     orgid: 1
 - name: Promote requested packages in content view
