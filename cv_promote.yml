@@ -2,9 +2,6 @@
 - hosts: localhost
   vars:
     orgid: 1
-- name: Promote requested packages in content view
-  vars:
-    orgid: 1
   tasks:
   - name: Call Satellite API to promote content
     uri:
