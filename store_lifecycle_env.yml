@@ -7,4 +7,4 @@
     - name: Store the lifecycle environment id for later use
       set_stats:
         data:
-          lc_id: "[ {{ ansible_facts.foreman.content_facet_attributes.lifecycle_environment_id }} ]"
+          lc_id: "[ {{ foreman.content_facet_attributes.lifecycle_environment_id }} ]"
