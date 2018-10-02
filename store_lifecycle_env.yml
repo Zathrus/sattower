@@ -1,6 +1,8 @@
 ---
-- hosts: {{ destmachine }}
-    gather_facts: no
+- hosts: "{{ destmachine }}"
+  vars:
+    destmachine: all:!sat.example.com:!localhost
+  gather_facts: False
   tasks:
     - name: Store the lifecycle environment id for later use
       set_stats:
