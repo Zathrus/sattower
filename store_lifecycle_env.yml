@@ -7,4 +7,5 @@
     - name: Store the lifecycle environment id for later use
       set_stats:
         data:
+          cv_id: "[ {{ foreman.content_facet_attributes.content_view_id }} ]"
           lc_id: "[ {{ foreman.content_facet_attributes.lifecycle_environment_id }} ]"

@@ -14,9 +14,12 @@
       body_format: json
       body:
         content_view_version_environments:
-          - "{{ lc_id | unique }}"
+          -
+            content_view_version_id: "{{ cv_id | min }}"
+            environment_ids: "{{ lc_id | unique }}"
         resolve_dependencies: 1
         add_content:
-          - "{{ errata_id }}"
+          errata_ids:
+            - "{{ errata_id }}"
         updated_hosts[included]:
           - nil
