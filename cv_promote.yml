@@ -11,6 +11,7 @@
       user: admin
       password: "{{ ansible_password }}"
       method: POST
+      body_format: json
       body:
         content_view_version_environments:
           - "{{ lc_id | unique }}"
