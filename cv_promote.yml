@@ -19,8 +19,8 @@
           -
             content_view_version_id: "{{ cvv_id | min }}"
             environment_ids: "{{ lc_id | unique }}"
-        resolve_dependencies: 1
         add_content:
           errata_ids:
             - "{{ errata_id }}"
         updated_hosts[included]: "{{ host_id }}"
+      status_code: 200, 202
