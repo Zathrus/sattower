@@ -5,6 +5,6 @@
 
 - name: "Update packages"
   yum:
-    name: "{{ pkglist | join(' ') }}"
+    name: "{{ pkglist | join(',') }}"
     state: latest
   register: package_update

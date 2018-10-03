@@ -10,7 +10,7 @@
         validate_certs: no
         force_basic_auth: yes
         user: admin
-        password: {{ ansible_password }}
+        password: "{{ ansible_password }}"
       register: cvvout
 
     - name: Store the lifecycle environment id for later use
