@@ -15,11 +15,10 @@
       body:
         content_view_version_environments:
           -
-            content_view_version_id: "{{ cv_id | min }}"
+            content_view_version_id: "{{ cvv_id | min }}"
             environment_ids: "{{ lc_id | unique }}"
         resolve_dependencies: 1
         add_content:
           errata_ids:
             - "{{ errata_id }}"
-        updated_hosts[included]:
-          - nil
+        updated_hosts[included]: "{{ host_id }}"

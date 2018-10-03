@@ -4,8 +4,18 @@
     destmachine: all:!sat.example.com:!localhost
   gather_facts: False
   tasks:
+    - name: Fetch content view version
+      uri:
+        url: "https://sat.example.com/katello/api/content_view_versions?environment_id={{ foreman.content_facet_attributes.lifecycle_environment_id }}"
+        validate_certs: no
+        force_basic_auth: yes
+        user: admin
+        password: {{ ansible_password }}
+      register: cvvout
+
     - name: Store the lifecycle environment id for later use
       set_stats:
         data:
-          cv_id: "[ {{ foreman.content_facet_attributes.content_view_id }} ]"
+          cvv_id: "[ {{ cvvout.json.results[0].task.version_output[0].version_id }} ]"
           lc_id: "[ {{ foreman.content_facet_attributes.lifecycle_environment_id }} ]"
+          host_id: "[ {{ foreman.id }} ]"
