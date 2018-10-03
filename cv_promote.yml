@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  become: no
+  connection: local
   vars:
     orgid: 1
   tasks:

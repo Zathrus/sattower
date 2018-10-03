@@ -1,4 +1,6 @@
 - hosts: localhost
+  become: no
+  connection: local
   tasks:
   - name: Call Satellite API for errata info
     uri:
