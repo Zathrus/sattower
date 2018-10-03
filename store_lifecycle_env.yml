@@ -16,6 +16,6 @@
     - name: Store the lifecycle environment id for later use
       set_stats:
         data:
-          cvv_id: "[ {{ cvvout.json.results[0].task.version_output[0].version_id }} ]"
+          cvv_id: "[ {{ cvvout.json.results[0].last_event.version_id }} ]"
           lc_id: "[ {{ foreman.content_facet_attributes.lifecycle_environment_id }} ]"
           host_id: "[ {{ foreman.id }} ]"
